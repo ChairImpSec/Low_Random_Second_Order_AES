@@ -27,7 +27,8 @@ module AESSbox_2OM(
     input [7:0] x2,
     input [7:0] x3,
     input [7:0] Guards,
-	 input [131:0] r,
+	input [131:0] r,
+	input [7:0] r2,
     output [7:0] Guards_out,
     output [7:0] out1,
     output [7:0] out2,
@@ -153,9 +154,9 @@ module AESSbox_2OM(
 		b3_reg6 <= b3_reg5;
 		
 		//stage 7
-		e1_refreshed <= e1 ^ Guards[3:0]; 
-		e2_refreshed <= e2 ^ Guards[7:4]; 
-		e3_refreshed <= e3 ^ Guards[7:4] ^ Guards[3:0]; 
+		e1_refreshed <= e1 ^ Guards[3:0] ^ r2[3:0]; 
+		e2_refreshed <= e2 ^ Guards[7:4] ^ r2[7:4]; 
+		e3_refreshed <= e3 ^ Guards[7:4] ^ Guards[3:0] ^ r2[7:4] ^ r2[3:0]; 
 		
 		a1_reg7 <= a1_reg6;
 		a2_reg7 <= a2_reg6;
